@@ -7,7 +7,7 @@ public class Cliente {
     public Cliente(double chegada) {
         this.chegada = chegada;
         Random rand = new Random();
-        this.atendimento = (30 + rand.nextInt(90)) / 8.0;  // Dividir por 8
+        this.atendimento = (30 + rand.nextInt(90)) / 60.0;  // Dividir por 60
     }
 
     public double getChegada() {
