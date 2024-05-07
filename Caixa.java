@@ -14,6 +14,7 @@ public class Caixa extends Thread {
             try {
                 Cliente cliente = fila.take();
                 Thread.sleep((long) cliente.getAtendimento() * 1000);
+                cliente.setAtendimentoFinalizado((System.currentTimeMillis() - cliente.getChegada()) / 1000);
                 System.out.println("Atendeu cliente que chegou em " + cliente.getChegada() + " e atendeu por " + cliente.getAtendimento());
             } catch (InterruptedException e) {
                 e.printStackTrace();

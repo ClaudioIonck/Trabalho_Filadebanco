@@ -5,7 +5,7 @@ public class Main {
         Banco banco = new Banco(50); // numero de atendentes
         double inicio = System.currentTimeMillis();
         Random rand = new Random();
-        while (System.currentTimeMillis() - inicio < 7200000) {  // 2 horas em milissegundos
+        while (true) {
             if ((System.currentTimeMillis() - inicio) / 1000 > 120) {  // 2 minutos em segundos
                 break;
             }
@@ -15,6 +15,13 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            if ((System.currentTimeMillis() - inicio) / 1000 > 120) {  // 2 minutos em segundos
+                break;
+            }
         }
+        System.out.println("\n\n\n\n\nNúmero de clientes atendidos: " + banco.getNumeroClientesAtendidos());
+        System.out.println("Tempo máximo de espera: " + banco.getTempoMaximoEspera());
+        System.out.println("Tempo máximo de atendimento: " + banco.getTempoMaximoAtendimento());
+        System.out.println("Tempo médio no banco: " + banco.getTempoMedioNoBanco());
     }
 }
