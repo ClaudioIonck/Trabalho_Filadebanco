@@ -1,6 +1,9 @@
 import java.util.Random;
 
 public class Main {
+
+    public static volatile boolean simulacaoTerminada = false;
+
     public static void main(String[] args) {
         try {
             Banco banco = new Banco(3); // numero de atendentes
@@ -14,8 +17,9 @@ public class Main {
                     e.printStackTrace();
                 }
             }
+            simulacaoTerminada = true; // Sinalizar término da simulação
+
             for (Caixa caixa : banco.getCaixas()) {
-                caixa.stopThread();
                 try {
                     caixa.join(); // esperar a thread terminar
                 } catch (InterruptedException e) {
