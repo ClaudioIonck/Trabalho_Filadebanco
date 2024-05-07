@@ -45,6 +45,7 @@ public class Caixa extends Thread {
         return tempoOcupado;
     }
 
+    //ver isso aqui
     public void stopThread() {
         running = false;
     }

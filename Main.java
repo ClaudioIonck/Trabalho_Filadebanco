@@ -4,9 +4,10 @@ public class Main {
 
     public static volatile boolean simulacaoTerminada = false;
 
+    // ver isso aqui
     public static void main(String[] args) {
         try {
-            Banco banco = new Banco(3); // numero de atendentes
+            Banco banco = new Banco(5); // numero de atendentes
             double inicio = System.currentTimeMillis();
             Random rand = new Random();
             while ((System.currentTimeMillis() - inicio) / 1000 <= 120) {  // 2 minutos em segundos

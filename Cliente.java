@@ -29,6 +29,7 @@ public class Cliente {
         this.tempoEntradaFila = tempoEntradaFila;
     }
 
+    // ver isso aqui
     public double getTempoNoBanco() {
         return tempoEntradaFila + atendimento;
     }

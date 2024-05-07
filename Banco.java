@@ -43,6 +43,7 @@ public class Banco {
                 .average().orElse(0);
     }
 
+    // ver isso aqui
     public double getTempoMedioEsperaFila() {
         return clientes.stream().mapToDouble(c -> c.getAtendimento() - c.getTempoEntradaFila()).average().orElse(0);
     }
