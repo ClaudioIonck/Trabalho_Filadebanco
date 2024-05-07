@@ -1,6 +1,5 @@
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-
 public class Caixa extends Thread {
     private BlockingQueue<Cliente> fila = new LinkedBlockingQueue<>();
 

@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Banco banco = new Banco(50); // numero de atendentes
+        Banco banco = new Banco(3); // numero de atendentes
         double inicio = System.currentTimeMillis();
         Random rand = new Random();
         while (true) {
@@ -19,9 +19,20 @@ public class Main {
                 break;
             }
         }
-        System.out.println("\n\n\n\n\nNúmero de clientes atendidos: " + banco.getNumeroClientesAtendidos());
-        System.out.println("Tempo máximo de espera: " + banco.getTempoMaximoEspera());
-        System.out.println("Tempo máximo de atendimento: " + banco.getTempoMaximoAtendimento());
-        System.out.println("Tempo médio no banco: " + banco.getTempoMedioNoBanco());
+        System.out.println("\n\n\nNúmero de clientes atendidos: " + banco.getNumeroClientesAtendidos());
+        System.out.println("Tempo máximo de espera: " + formatTime(banco.getTempoMaximoEspera() * 60)); // Multiplicar por 60 pois fatoramso o tempo em 1 de 60
+        System.out.println("Tempo máximo de atendimento: " + formatTime(banco.getTempoMaximoAtendimento() * 60));
+        System.out.println("Tempo médio no banco: " + formatTime(banco.getTempoMedioNoBanco() * 60));
+    }
+
+    // formatacao do tempo
+    private static String formatTime(double timeInSeconds) {
+        if (timeInSeconds >= 3600) {
+            return String.format("%.2fh", timeInSeconds / 3600);
+        } else if (timeInSeconds >= 60) {
+            return String.format("%.2fmin", timeInSeconds / 60);
+        } else {
+            return String.format("%.2fs", timeInSeconds);
+        }
     }
 }
