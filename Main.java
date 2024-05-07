@@ -32,7 +32,7 @@ public class Main {
             double tempoMaximoEspera = banco.getTempoMaximoEspera();
             System.out.println("Tempo máximo de espera: " + formatTime(tempoMaximoEspera));
             System.out.println("Tempo máximo de atendimento: " + formatTime(banco.getTempoMaximoAtendimento()));
-            System.out.println("Tempo médio no banco: " + formatTime(banco.getTempoMedioNoBanco()));
+            System.out.println("Tempo médio no banco: " + formatTime(Math.abs(banco.getTempoMedioNoBanco())));
 
             // Verificação do objetivo de 2 minutos
             if (tempoMaximoEspera <= 120) {

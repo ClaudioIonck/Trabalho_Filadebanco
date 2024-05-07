@@ -14,8 +14,15 @@ public class Caixa extends Thread {
     @Override
     public void run() {
         try {
-            while (running && !Main.simulacaoTerminada) {
-                Cliente cliente = fila.take();
+            while (running) {
+                Cliente cliente = fila.poll();
+                if (cliente == null) {
+                    if (Main.simulacaoTerminada) {
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
                 double tempoAtendimento = cliente.getAtendimento() * 1000;
                 Thread.sleep((long) tempoAtendimento);
                 cliente.finalizarAtendimento(); // Atualizar o tempo de atendimento no cliente
