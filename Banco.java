@@ -38,11 +38,11 @@ public class Banco {
     }
 
     public double getTempoMedioNoBanco() {
-        return clientes.stream().mapToDouble(c -> c.getAtendimentoFinalizado() - c.getChegada()).average().orElse(0);
+        return clientes.stream().mapToDouble(Cliente::getAtendimento).average().orElse(0); // Usar c.getAtendimento()
     }
 
     public double getTempoMedioEsperaFila() {
-        return clientes.stream().mapToDouble(c -> c.getAtendimentoFinalizado() - c.getTempoEntradaFila()).average().orElse(0);
+        return clientes.stream().mapToDouble(c -> c.getAtendimento() - c.getTempoEntradaFila()).average().orElse(0); // Usar c.getAtendimento()
     }
 
     public List<Caixa> getCaixas() {

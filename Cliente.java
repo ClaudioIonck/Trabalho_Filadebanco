@@ -3,7 +3,6 @@ import java.util.Random;
 public class Cliente {
     private double chegada;
     private double atendimento;
-    private double atendimentoFinalizado;
     private double tempoEntradaFila;
 
     public Cliente(double chegada) {
@@ -20,19 +19,20 @@ public class Cliente {
         return atendimento;
     }
 
-    public void setAtendimentoFinalizado(double atendimentoFinalizado) {
-        this.atendimentoFinalizado = atendimentoFinalizado;
-    }
-
-    public double getAtendimentoFinalizado() {
-        return atendimentoFinalizado;
-    }
-
     public double getTempoEntradaFila() {
         return tempoEntradaFila;
     }
 
     public void setTempoEntradaFila(double tempoEntradaFila) {
         this.tempoEntradaFila = tempoEntradaFila;
+    }
+
+    public double getTempoNoBanco() {
+        return tempoEntradaFila + atendimento;
+    }
+
+    public void finalizarAtendimento() {
+        double tempoAtual = (System.currentTimeMillis() - chegada * 1000) / 1000; // Tempo em segundos
+        atendimento = tempoAtual - tempoEntradaFila; // Atualizar o tempo de atendimento real
     }
 }
