@@ -9,7 +9,7 @@ public class Cliente {
     public Cliente(double chegada) {
         this.chegada = chegada;
         Random rand = new Random();
-        this.atendimentoOriginal = (30 + rand.nextInt(90)) / 60.0;  // Dividir por 60
+        this.atendimentoOriginal = (30 + rand.nextInt(90)) / 60.0;
         this.atendimento = atendimentoOriginal;
     }
 
@@ -35,5 +35,9 @@ public class Cliente {
 
     public void finalizarAtendimento() {
         atendimento = atendimentoOriginal;
+    }
+
+    public double getAtendimentoOriginal() {
+        return atendimentoOriginal;
     }
 }
