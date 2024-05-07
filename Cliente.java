@@ -4,6 +4,7 @@ public class Cliente {
     private double chegada;
     private double atendimento;
     private double atendimentoFinalizado;
+    private double tempoEntradaFila;
 
     public Cliente(double chegada) {
         this.chegada = chegada;
@@ -25,5 +26,13 @@ public class Cliente {
 
     public double getAtendimentoFinalizado() {
         return atendimentoFinalizado;
+    }
+
+    public double getTempoEntradaFila() {
+        return tempoEntradaFila;
+    }
+
+    public void setTempoEntradaFila(double tempoEntradaFila) {
+        this.tempoEntradaFila = tempoEntradaFila;
     }
 }

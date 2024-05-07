@@ -5,24 +5,43 @@ public class Main {
         Banco banco = new Banco(3); // numero de atendentes
         double inicio = System.currentTimeMillis();
         Random rand = new Random();
-        while (true) {
-            if ((System.currentTimeMillis() - inicio) / 1000 > 120) {  // 2 minutos em segundos
-                break;
-            }
+        while ((System.currentTimeMillis() - inicio) / 1000 <= 120) {  // 2 minutos em segundos
             banco.adicionarCliente(new Cliente((System.currentTimeMillis() - inicio) / 1000));
             try {
                 Thread.sleep((5000 + rand.nextInt(45000)) / 60);  // Dividir por 60
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if ((System.currentTimeMillis() - inicio) / 1000 > 120) {  // 2 minutos em segundos
-                break;
+        }
+        for (Caixa caixa : banco.getCaixas()) {
+            caixa.stopThread();
+            try {
+                caixa.join(); // esperar a thread terminar
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+
+        double tempoTotalSimulacao = (System.currentTimeMillis() - inicio) / 1000;
         System.out.println("\n\n\nNúmero de clientes atendidos: " + banco.getNumeroClientesAtendidos());
-        System.out.println("Tempo máximo de espera: " + formatTime(banco.getTempoMaximoEspera() * 60)); // Multiplicar por 60 pois fatoramso o tempo em 1 de 60
+        double tempoMaximoEspera = banco.getTempoMaximoEspera() * 60; // Multiplicar por 60 pois fatoramso o tempo em 1 de 60
+        System.out.println("Tempo máximo de espera: " + formatTime(tempoMaximoEspera));
         System.out.println("Tempo máximo de atendimento: " + formatTime(banco.getTempoMaximoAtendimento() * 60));
         System.out.println("Tempo médio no banco: " + formatTime(banco.getTempoMedioNoBanco() * 60));
+
+        // Verificação do objetivo de 2 minutos
+        if (tempoMaximoEspera <= 120) {
+            System.out.println("Objetivo de 2 minutos de espera máxima atingido.");
+        } else {
+            System.out.println("Objetivo de 2 minutos de espera máxima não foi atingido.");
+        }
+
+        // Estatísticas de utilização dos caixas
+        for (int i = 0; i < banco.getCaixas().size(); i++) {
+            Caixa caixa = banco.getCaixas().get(i);
+            double porcentagemOcupacao = (caixa.getTempoOcupado() / tempoTotalSimulacao) * 100;
+            System.out.println("Caixa " + (i + 1) + " ficou ocupado " + porcentagemOcupacao + "% do tempo.");
+        }
     }
 
     // formatacao do tempo
