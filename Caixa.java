@@ -13,17 +13,20 @@ public class Caixa extends Thread {
 
     @Override
     public void run() {
-        while (running) {
-            try {
+        try {
+            while (running) {
                 Cliente cliente = fila.take();
                 double tempoAtendimento = cliente.getAtendimento() * 1000;
                 Thread.sleep((long) tempoAtendimento);
                 cliente.setAtendimentoFinalizado((System.currentTimeMillis() - cliente.getChegada()) / 1000);
                 tempoOcupado += tempoAtendimento / 1000; // increment the occupied time
                 System.out.println("Atendeu cliente que chegou em " + cliente.getChegada() + " e atendeu por " + cliente.getAtendimento());
-            } catch (InterruptedException e) {
-                running = false;
             }
+        } catch (InterruptedException e) {
+            running = false;
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
