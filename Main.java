@@ -29,10 +29,10 @@ public class Main {
 
             double tempoTotalSimulacao = (System.currentTimeMillis() - inicio) / 1000;
             System.out.println("\n\n\nNúmero de clientes atendidos: " + banco.getNumeroClientesAtendidos());
-            double tempoMaximoEspera = banco.getTempoMaximoEspera() * 60; // Multiplicar por 60 pois fatoramso o tempo em 1 de 60
+            double tempoMaximoEspera = banco.getTempoMaximoEspera();
             System.out.println("Tempo máximo de espera: " + formatTime(tempoMaximoEspera));
             System.out.println("Tempo máximo de atendimento: " + formatTime(banco.getTempoMaximoAtendimento() * 60));
-            System.out.println("Tempo médio no banco: " + formatTime(banco.getTempoMedioNoBanco() * 60));
+            System.out.println("Tempo médio no banco: " + formatTime(banco.getTempoMedioNoBanco()));
 
             // Verificação do objetivo de 2 minutos
             if (tempoMaximoEspera <= 120) {
@@ -55,9 +55,7 @@ public class Main {
 
     // formatacao do tempo
     private static String formatTime(double timeInSeconds) {
-        if (timeInSeconds >= 3600) {
-            return String.format("%.2fh", timeInSeconds / 3600);
-        } else if (timeInSeconds >= 60) {
+        if (timeInSeconds >= 60) {
             return String.format("%.2fmin", timeInSeconds / 60);
         } else {
             return String.format("%.2fs", timeInSeconds);
