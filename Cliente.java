@@ -1,10 +1,10 @@
 import java.util.Random;
 
 public class Cliente {
-    private double chegada;
+    private final double chegada;
     private double atendimento;
     private double tempoEntradaFila;
-    private double atendimentoOriginal;
+    private final double atendimentoOriginal;
 
     public Cliente(double chegada) {
         this.chegada = chegada;
@@ -27,11 +27,6 @@ public class Cliente {
 
     public void setTempoEntradaFila(double tempoEntradaFila) {
         this.tempoEntradaFila = tempoEntradaFila;
-    }
-
-    // ver isso aqui
-    public double getTempoNoBanco() {
-        return tempoEntradaFila + atendimento;
     }
 
     public void finalizarAtendimento() {

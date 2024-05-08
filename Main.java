@@ -1,5 +1,7 @@
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 public class Main {
 
     public static volatile boolean simulacaoTerminada = false;
@@ -13,9 +15,9 @@ public class Main {
             while ((System.currentTimeMillis() - inicio) / 1000 <= 120) {  // 2 minutos em segundos
                 banco.adicionarCliente(new Cliente((System.currentTimeMillis() - inicio) / 1000));
                 try {
-                    Thread.sleep((5000 + rand.nextInt(45000)) / 60);  // Dividir por 60
+                    sleep((5000 + rand.nextInt(45000)) /60);  // Dividir por 60
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    e.printStackTrace(System.out);
                 }
             }
             simulacaoTerminada = true; // Sinalizar término da simulação
@@ -24,7 +26,7 @@ public class Main {
                 try {
                     caixa.join(); // esperar a thread terminar
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    e.printStackTrace(System.out);
                 }
             }
 
@@ -50,7 +52,7 @@ public class Main {
             }
         } catch (Exception e) {
             System.out.println("An unexpected error occurred during the simulation: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
     }
 

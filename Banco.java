@@ -2,8 +2,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Banco {
-    private List<Caixa> caixas = new ArrayList<>();
-    private List<Cliente> clientes = new ArrayList<>();
+    private final List<Caixa> caixas = new ArrayList<>();
+    private final List<Cliente> clientes = new ArrayList<>();
 
     public Banco(int numCaixas) {
         for (int i = 0; i < numCaixas; i++) {
@@ -34,18 +34,13 @@ public class Banco {
     }
 
     public double getTempoMaximoAtendimento() {
-        return clientes.stream().mapToDouble(c -> c.getAtendimentoOriginal()).max().orElse(0);
+        return clientes.stream().mapToDouble(Cliente::getAtendimentoOriginal).max().orElse(0);
     }
 
     public double getTempoMedioNoBanco() {
         return clientes.stream()
                 .mapToDouble(c -> (c.getTempoEntradaFila() + c.getAtendimentoOriginal()) / 60000) // Conversão para minutos
                 .average().orElse(0);
-    }
-
-    // ver isso aqui
-    public double getTempoMedioEsperaFila() {
-        return clientes.stream().mapToDouble(c -> c.getAtendimento() - c.getTempoEntradaFila()).average().orElse(0);
     }
 
     public List<Caixa> getCaixas() {

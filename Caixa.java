@@ -1,6 +1,8 @@
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import static java.lang.Thread.sleep;
+
 public class Caixa extends Thread {
     private BlockingQueue<Cliente> fila = new LinkedBlockingQueue<>();
     private double tempoOcupado = 0;
@@ -24,7 +26,7 @@ public class Caixa extends Thread {
                     }
                 }
                 double tempoAtendimento = cliente.getAtendimento() * 1000;
-                Thread.sleep((long) tempoAtendimento);
+                sleep((long) tempoAtendimento);
                 cliente.finalizarAtendimento(); // Atualizar o tempo de atendimento no cliente
                 tempoOcupado += tempoAtendimento / 1000;
                 System.out.println("Atendeu cliente que chegou em " + cliente.getChegada() + " e atendeu por " + cliente.getAtendimento());
@@ -45,8 +47,4 @@ public class Caixa extends Thread {
         return tempoOcupado;
     }
 
-    //ver isso aqui
-    public void stopThread() {
-        running = false;
-    }
 }
