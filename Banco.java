@@ -48,6 +48,13 @@ public class Banco {
                 .average().orElse(0);
     }
 
+    public double getTempoMedioEspera() {
+        double totalEspera = clientes.stream()
+                .mapToDouble(c -> c.getTempoEntradaFila() - c.getChegada())
+                .sum();
+        return totalEspera / clientes.size();
+    }
+
     public List<Caixa> getCaixas() {
         return caixas;
     }

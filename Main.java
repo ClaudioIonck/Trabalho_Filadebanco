@@ -6,7 +6,6 @@ public class Main {
 
     public static volatile boolean simulacaoTerminada = false;
 
-    // ver isso aqui
     public static void main(String[] args) {
         try {
             Banco banco = new Banco(5); // numero de atendentes
@@ -29,13 +28,15 @@ public class Main {
                     e.printStackTrace(System.out);
                 }
             }
-
             double tempoTotalSimulacao = (System.currentTimeMillis() - inicio) / 1000;
             System.out.println("\n\n\nNúmero de clientes atendidos: " + banco.getNumeroClientesAtendidos());
             double tempoMaximoEspera = banco.getTempoMaximoEspera();
             System.out.println("Tempo máximo de espera: " + formatTime(tempoMaximoEspera));
             System.out.println("Tempo máximo de atendimento: " + String.format("%.2fmin", banco.getTempoMaximoAtendimento()));
             System.out.println("Tempo médio no banco: " + formatTime(Math.abs(banco.getTempoMedioNoBanco()) / 60));
+
+            // Adicione esta linha para imprimir o tempo médio de espera na fila
+            System.out.println("Tempo médio de espera na fila: " + formatTime(banco.getTempoMedioEspera()));
 
             // Verificação do objetivo de 2 minutos
             if (tempoMaximoEspera <= 120) {
