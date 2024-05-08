@@ -7,10 +7,15 @@ public class Banco {
 
     public Banco(int numCaixas) {
         for (int i = 0; i < numCaixas; i++) {
-            Caixa caixa = new Caixa();
-            caixa.start();
-            caixas.add(caixa);
+            adicionarCaixa();
         }
+    }
+
+    public synchronized void adicionarCaixa() {
+        Caixa caixa = new Caixa();
+        caixa.start();
+        caixas.add(caixa);
+        notifyAll(); // Notificar todas as threads
     }
 
     public void adicionarCliente(Cliente cliente) {
